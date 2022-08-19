@@ -1,0 +1,15 @@
+module synchronizer (clk, in, out);
+	parameter n = 5;
+	input clk;
+	input [4:0] in;
+	output reg [4:0] out;
+	
+	reg [4:0] temp_ff;
+	
+	always@(posedge clk)
+	begin
+		temp_ff <= in;
+		out <= temp_ff;
+	end
+	
+endmodule

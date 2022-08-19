@@ -1,0 +1,52 @@
+module async_fifo_tb; 
+
+reg [7:0] wr_data;
+reg wclk,rclk,winc,rinc,wrst_n,rrst_n;
+wire wfull,rempty;
+
+wire [7:0] rd_data;
+
+async_fifo dut (rclk, wclk, wrst_n, rrst_n, rinc, winc, rd_data, wr_data, wfull, rempty);
+
+
+initial
+	begin
+		wclk = 0;
+		rclk = 0;
+		wfull = 0;
+		rempty = 0;
+		wrst_n = 1;
+		rrst_n = 1;
+		#5 wrst_n = 0;
+		#5 rrst_n = 0;
+		#5 wrst_n = 1;
+		#5 rrst_n = 1;
+	end
+	
+
+always #10 wclk = ~wclk;
+always #100 rclk = ~rclk;
+	
+always@ (posedge wclk)
+	begin
+		wr_data <= 1;
+		winc	<= 1; 
+		#40 wr_data <= 2;
+		#40 wr_data <= 3;
+		#40 wr_data <= 4;
+		#40 wr_data <= 5;
+		
+		#420 winc	<= 0; 
+		
+		#1000 $finish;
+	end
+always@ (posedge rclk)
+	begin
+
+		#70 rinc <= 1;
+		
+		#1000 rinc <= 0;
+	
+		#700 $finish;
+	end
+endmodule

@@ -1,1 +1,2 @@
-# Asynchronous_FIFO
+# Asynchronous-FIFO
+N-Byte Asynchronous FIFO Design

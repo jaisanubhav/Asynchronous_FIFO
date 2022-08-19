@@ -1,0 +1,8 @@
+module dual_ram (clk, wr_en, wr_addr, rd_addr, wr_data, rd_data);
+	input clk;
+	input wr_en;
+	input [4:0] rd_addr, wr_addr;
+	
+	
+	
+endmodule
